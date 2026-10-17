@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-node';
+import adapter from '@sveltejs/adapter-bun';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
@@ -8,12 +8,12 @@ export default defineConfig({
 		// SvelteKit の設定もここに置く (SvelteKit 3 から `svelte.config.*` は読まれない)。
 		sveltekit({
 			preprocess: vitePreprocess(),
-			// adapter-node の出力を `bun ./build/index.js` で動かす。
+			// adapter-bun の出力を `bun ./build` で動かす。
 			// Bun で起動するので、サーバ側では `bun:sqlite` をそのまま使える。
 			adapter: adapter(),
 			paths: {
-				// 公開 URL の origin (CSRF 判定に使う)。adapter-node 6 で実行時の `ORIGIN`
-				// が無くなったので、必要ならビルド時の `ORIGIN` で埋め込む。未設定なら
+				// 公開 URL の origin (CSRF 判定に使う)。adapter-bun に実行時の `ORIGIN` は
+				// 無いので、必要ならビルド時の `ORIGIN` で埋め込む。未設定なら
 				// リクエストの Host (+ `PROTOCOL_HEADER`、既定 https) から求める。
 				origin: process.env.ORIGIN || undefined,
 			},

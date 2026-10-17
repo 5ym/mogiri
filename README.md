@@ -12,8 +12,8 @@
 
 | 領域           | 使用技術                                                        |
 | -------------- | --------------------------------------------------------------- |
-| ランタイム     | [Bun](https://bun.sh) 1.3+                                       |
-| フレームワーク | [SvelteKit 3](https://svelte.dev/docs/kit)（Svelte 5 / runes）+ adapter-node |
+| ランタイム     | [Bun](https://bun.sh) 1.4+                                       |
+| フレームワーク | [SvelteKit 3](https://svelte.dev/docs/kit)（Svelte 5 / runes）+ adapter-bun |
 | データベース   | SQLite（`bun:sqlite`、生SQLの薄いクエリ層）                    |
 | UI             | [Blades](https://blades.ninja/) の Pico（Pico CSS v2 の後継、素の CSS）。自前のクラスは持たず Pico の書き方に寄せる |
 | 認証           | サーバーサイドセッション（Cookie）+ `Bun.password`（argon2id）  |
@@ -48,7 +48,7 @@ bun run dev
 
 ```shell
 ORIGIN=https://your-domain bun run build
-DATABASE_URL=./data/mogiri.db bun ./build/index.js
+DATABASE_URL=./data/mogiri.db bun ./build
 ```
 
 SvelteKit の CSRF 判定は、自分の origin とフォーム送信の `Origin` を突き合わせます。
@@ -56,11 +56,11 @@ SvelteKit の CSRF 判定は、自分の origin とフォーム送信の `Origin
 TLS を終端するリバースプロキシが `Host` をそのまま渡すなら設定は要りません。
 それ以外（平文 http で直に開く、`Host` を書き換える等）は、**ビルド時**に `ORIGIN`
 を渡して `paths.origin` に埋め込むか、実行時に `PROTOCOL_HEADER` / `HOST_HEADER`
-を設定してください（adapter-node 6 で実行時の `ORIGIN` は無くなりました）。
+を設定してください（adapter-bun に実行時の `ORIGIN` はありません）。
 `ORIGIN` はビルド成果物に埋め込まれるため、公開ドメインを変えたら再ビルドが必要です。
-サーバーは `bun:sqlite` を使うため、必ず **Bun** で起動してください。
+サーバーは `bun:sqlite` と adapter-bun を使うため、ビルドも起動も **Bun**（1.4 以上）で行ってください。
 
-> **実行時依存ゼロ**: すべての依存は `devDependencies` にあり、adapter-node が
+> **実行時依存ゼロ**: すべての依存は `devDependencies` にあり、adapter-bun が
 > サーバーバンドルへ固めるため、本番実行に `node_modules` は不要です
 > （`build/` と Bun だけで動きます）。
 

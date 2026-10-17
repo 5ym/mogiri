@@ -7,14 +7,14 @@ RUN bun install --frozen-lockfile
 
 COPY . .
 # 公開 URL の origin (例: https://your-domain)。SvelteKit の `paths.origin` として
-# ビルド時に埋め込む (adapter-node 6 で実行時の ORIGIN は無くなった)。空なら
+# ビルド時に埋め込む (adapter-bun に実行時の ORIGIN は無い)。空なら
 # リクエストの Host から求める (vite.config.ts)。
 ARG ORIGIN=
 RUN ORIGIN=$ORIGIN bun run build
 
 # --- Runtime stage --------------------------------------------------------
 # All dependencies are bundled into build/ (devDependencies are bundled by
-# adapter-node; the runtime dependencies list is empty), so the runtime image
+# adapter-bun; the runtime dependencies list is empty), so the runtime image
 # needs no node_modules — just Bun and the build output.
 FROM oven/bun:1.4-slim AS runtime
 WORKDIR /app
@@ -32,4 +32,4 @@ VOLUME /app/data
 EXPOSE 3000
 
 # The server must run under Bun so `bun:sqlite` is available.
-CMD ["bun", "./build/index.js"]
+CMD ["bun", "./build"]
