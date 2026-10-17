@@ -5,8 +5,33 @@
  *
  * Pico は `pico` の層(@layer)に入れる。層の外にある各画面の <style> は、詳細度に関係なく
  * 必ず Pico に勝つ。
+ *
+ * Pico は使う部品だけを読む(順番は variables → layout → content → forms → components →
+ * utilities を崩さない)。使っていないので読まないもの: section・figure、
+ * 色・日付・ファイル・範囲・検索の入力欄、accordion(details)・dropdown・progress・tooltip。
+ * 画面でこれらを使うときは、ここに足す。
  */
-@import "@anyblades/blades/pico" layer(pico);
+@import "@anyblades/blades/pico/variables" layer(pico);
+@import "@anyblades/blades/pico/layout/document" layer(pico);
+@import "@anyblades/blades/pico/layout/landmarks" layer(pico);
+@import "@anyblades/blades/pico/layout/container" layer(pico);
+@import "@anyblades/blades/pico/layout/grid" layer(pico);
+@import "@anyblades/blades/pico/layout/overflow-auto" layer(pico);
+@import "@anyblades/blades/pico/content/typography" layer(pico);
+@import "@anyblades/blades/pico/content/link" layer(pico);
+@import "@anyblades/blades/pico/content/button" layer(pico);
+@import "@anyblades/blades/pico/content/table" layer(pico);
+@import "@anyblades/blades/pico/content/embedded-content" layer(pico);
+@import "@anyblades/blades/pico/content/code" layer(pico);
+@import "@anyblades/blades/pico/content/misc" layer(pico);
+@import "@anyblades/blades/pico/forms/basics" layer(pico);
+@import "@anyblades/blades/pico/forms/checkbox-radio-switch" layer(pico);
+@import "@anyblades/blades/pico/components/card" layer(pico);
+@import "@anyblades/blades/pico/components/group" layer(pico);
+@import "@anyblades/blades/pico/components/loading" layer(pico);
+@import "@anyblades/blades/pico/components/modal" layer(pico);
+@import "@anyblades/blades/pico/components/nav" layer(pico);
+@import "@anyblades/blades/pico/utilities" layer(pico);
 
 :root {
 	/* Web フォントは束ねない(OS のフォントに任せる) */

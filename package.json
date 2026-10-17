@@ -16,7 +16,7 @@
 		"db:seed": "bun run src/lib/server/db/seed.ts"
 	},
 	"devDependencies": {
-		"@anyblades/blades": "^3.0.0",
+		"@anyblades/blades": "3.1.0-alpha.1",
 		"@biomejs/biome": "^2.5.15",
 		"@stripe/stripe-js": "^10.1.0",
 		"@sveltejs/adapter-node": "^6.0.0",
