@@ -3,8 +3,10 @@
 	"extends": ["github>5ym/repo-config"],
 	"packageRules": [
 		{
-			"description": "@anyblades/blades はプレリリースに固定中で、部品ごとの入り口がまだ変わり得る。CI が無いので自動では入れない。安定版に戻したらこの規則を消す",
+			"description": "@anyblades/blades はプレリリースに固定中で、部品ごとの入り口がまだ変わり得る。CI が無いので自動では入れない。ほかの更新の自動マージを止めないよう、まとめの PR から外して別の PR にする。安定版に戻したらこの規則を消す",
 			"matchPackageNames": ["@anyblades/blades"],
+			"groupName": "@anyblades/blades",
+			"groupSlug": "blades",
 			"automerge": false
 		}
 	]
