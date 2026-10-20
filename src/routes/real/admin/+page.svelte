@@ -1,4 +1,5 @@
 <script lang="ts">
+import '@anyblades/blades/layered/content/table';
 import OrderTable from '#lib/components/OrderTable.svelte';
 import PayStatus from '#lib/components/PayStatus.svelte';
 import { refreshAll } from '$app/navigation';

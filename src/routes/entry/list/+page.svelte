@@ -1,4 +1,6 @@
 <script lang="ts">
+import '@anyblades/blades/layered/content/table';
+import '@anyblades/blades/layered/content/code';
 import EntryLabel from '#lib/components/EntryLabel.svelte';
 import { refreshAll } from '$app/navigation';
 import type { PageData } from './$types';

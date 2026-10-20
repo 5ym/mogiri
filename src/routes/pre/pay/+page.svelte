@@ -1,4 +1,5 @@
 <script lang="ts">
+import '@anyblades/blades/layered/components/modal';
 import type { Stripe, StripeCardElement } from '@stripe/stripe-js';
 import { onMount } from 'svelte';
 import OrderTable from '#lib/components/OrderTable.svelte';

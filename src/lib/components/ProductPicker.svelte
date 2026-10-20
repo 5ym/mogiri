@@ -1,4 +1,5 @@
 <script lang="ts">
+import '@anyblades/blades/layered/components/group';
 import { MAX_COUNT, selectionKey } from '#lib/order.js';
 import type { CatalogProduct } from '#lib/server/db/schema.js';
 
