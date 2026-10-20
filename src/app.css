@@ -3,35 +3,47 @@
  * 自前のクラスや色は持たず、マークアップを Pico の書き方(article・role="button"・
  * role="group"・.grid・aria-busy など)に寄せる。ここに足すのは日本語向けの指定だけ。
  *
- * Pico は `pico` の層(@layer)に入れる。層の外にある各画面の <style> は、詳細度に関係なく
- * 必ず Pico に勝つ。
+ * Pico の部品は `blades` の層(@layer)に入った版(@anyblades/blades/layered/*)を読む。
+ * 層の外にある app.css や各画面の <style> は、詳細度に関係なく必ず Pico に勝つ。
  *
- * Pico は使う部品だけを読む(順番は variables → layout → content → forms → components →
- * utilities を崩さない)。使っていないので読まないもの: landmarks(body > main の余白だけで、SvelteKit は画面を
+ * ここで読むのは、ほぼどの画面でも使う共通の土台だけ(順番は variables → layout → content →
+ * forms → components → utilities を崩さない)。card はどの画面でも article に使い、modal の
+ * 土台にもなる。loading(aria-busy)はほとんどの画面で、nav はレイアウトのヘッダーで使う。
+ * checkbox-radio-switch はラジオを使うのが支払い画面だけだが、後から読むと utilities の
+ * [disabled] のカーソルより後ろに来て上書きしてしまうので、ここに置く。
+ *
+ * 一部の画面でしか使わない部品は、その要素を描くコンポーネントの <script> で import する
+ * (<style> の中で @import すると、その部品だけに閉じ込められて画面ごとに重複する)。
+ * Vite が画面ごとの CSS に分け、同じ部品は一度だけ読む。
+ * - content/table: OrderTable・entry/list・entry/status・real/admin
+ * - content/code: entry・entry/list・entry/status・pre/qr
+ * - components/group: ProductPicker
+ * - components/modal: pre/pay(card はここで読む)
+ * 画面ごとの CSS はここより後ろに来る。その部品が、Pico の順番で後ろにある共通の部品
+ * (utilities など)と同じ要素・同じ性質を指定していないか確かめてから外に出す。
+ *
+ * 使っていないので読まないもの: landmarks(body > main の余白だけで、SvelteKit は画面を
  * <div style="display: contents"> で包むので当たらない。body と main の初期化は document にある)・section・figure、
  * 色・日付・ファイル・範囲・検索の入力欄、accordion(details)・dropdown・progress・tooltip。
- * 画面でこれらを使うときは、ここに足す。
+ * 部品を足すときは、その要素を使うコンポーネントで `import '@anyblades/blades/layered/<部品>';` する。
+ * ほぼどの画面でも使うものや、ほかの部品の土台になるもの(forms/basics・content/button・card)は、ここに足す。
  */
-@import "@anyblades/blades/pico/variables" layer(pico);
-@import "@anyblades/blades/pico/layout/document" layer(pico);
-@import "@anyblades/blades/pico/layout/container" layer(pico);
-@import "@anyblades/blades/pico/layout/grid" layer(pico);
-@import "@anyblades/blades/pico/layout/overflow-auto" layer(pico);
-@import "@anyblades/blades/pico/content/typography" layer(pico);
-@import "@anyblades/blades/pico/content/link" layer(pico);
-@import "@anyblades/blades/pico/content/button" layer(pico);
-@import "@anyblades/blades/pico/content/table" layer(pico);
-@import "@anyblades/blades/pico/content/embedded-content" layer(pico);
-@import "@anyblades/blades/pico/content/code" layer(pico);
-@import "@anyblades/blades/pico/content/misc" layer(pico);
-@import "@anyblades/blades/pico/forms/basics" layer(pico);
-@import "@anyblades/blades/pico/forms/checkbox-radio-switch" layer(pico);
-@import "@anyblades/blades/pico/components/card" layer(pico);
-@import "@anyblades/blades/pico/components/group" layer(pico);
-@import "@anyblades/blades/pico/components/loading" layer(pico);
-@import "@anyblades/blades/pico/components/modal" layer(pico);
-@import "@anyblades/blades/pico/components/nav" layer(pico);
-@import "@anyblades/blades/pico/utilities" layer(pico);
+@import "@anyblades/blades/layered/variables";
+@import "@anyblades/blades/layered/layout/document";
+@import "@anyblades/blades/layered/layout/container";
+@import "@anyblades/blades/layered/layout/grid";
+@import "@anyblades/blades/layered/layout/overflow-auto";
+@import "@anyblades/blades/layered/content/typography";
+@import "@anyblades/blades/layered/content/link";
+@import "@anyblades/blades/layered/content/button";
+@import "@anyblades/blades/layered/content/embedded-content";
+@import "@anyblades/blades/layered/content/misc";
+@import "@anyblades/blades/layered/forms/basics";
+@import "@anyblades/blades/layered/forms/checkbox-radio-switch";
+@import "@anyblades/blades/layered/components/card";
+@import "@anyblades/blades/layered/components/loading";
+@import "@anyblades/blades/layered/components/nav";
+@import "@anyblades/blades/layered/utilities";
 
 :root {
 	/* Web フォントは束ねない(OS のフォントに任せる) */

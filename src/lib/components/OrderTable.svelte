@@ -1,4 +1,5 @@
 <script lang="ts">
+import '@anyblades/blades/layered/content/table';
 import type { OrderLine } from '#lib/server/orders.js';
 
 let { lines, total }: { lines: OrderLine[]; total: number } = $props();
