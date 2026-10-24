@@ -71,6 +71,12 @@ docker compose up --build
 # アプリ: http://localhost:3000
 ```
 
+実行イメージは distroless の Bun（シェル無し）で、uid 1000:1000 で動きます。初期データは
+`docker compose exec app bun run ./src/lib/server/db/seed.ts` で入れられます。root で動いていた
+以前のイメージで作ったボリュームはファイルが root 所有のままで書き込めないので、作り直すか
+（`docker compose down -v`）持ち主を直してください
+（`docker run --rm -v mogiri_db:/d busybox chown -R 1000:1000 /d`。ボリューム名は `docker volume ls` で確認）。
+
 ## 環境変数
 
 `.env.example` を参照してください。アプリが読む変数は `src/env.ts` で宣言します（SvelteKit 3 は宣言したものしか読めません）。主なもの:
