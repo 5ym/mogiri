@@ -10,17 +10,17 @@
 
 ## 技術スタック
 
-| 領域           | 使用技術                                                        |
-| -------------- | --------------------------------------------------------------- |
-| ランタイム     | [Bun](https://bun.sh) 1.4+                                       |
-| フレームワーク | [SvelteKit 3](https://svelte.dev/docs/kit)（Svelte 5 / runes）+ adapter-bun |
-| データベース   | SQLite（`bun:sqlite`、生SQLの薄いクエリ層）                    |
+| 領域           | 使用技術                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| ランタイム     | [Bun](https://bun.sh) 1.4.4+                                                                                        |
+| フレームワーク | [SvelteKit 3](https://svelte.dev/docs/kit)（Svelte 5 / runes）+ adapter-bun                                         |
+| データベース   | SQLite（`bun:sqlite`、生SQLの薄いクエリ層）                                                                         |
 | UI             | [Blades](https://blades.ninja/) の Pico（Pico CSS v2 の後継、素の CSS）。自前のクラスは持たず Pico の書き方に寄せる |
-| 認証           | サーバーサイドセッション（Cookie）+ `Bun.password`（argon2id）  |
-| メール         | Azure Communication Services（Email REST API / 依存ゼロ）       |
-| 決済           | Stripe（カード / 3-D セキュア）, 当日現金払い, Square POS（当日購入） |
-| QR             | 生成: `qrcode` / 読み取り: `html5-qrcode`                       |
-| Lint/Format    | [Biome](https://biomejs.dev)                                    |
+| 認証           | サーバーサイドセッション（Cookie）+ `Bun.password`（argon2id）                                                      |
+| メール         | Azure Communication Services（Email REST API / 依存ゼロ）                                                           |
+| 決済           | Stripe（カード / 3-D セキュア）, 当日現金払い, Square POS（当日購入）                                               |
+| QR             | 生成: `qrcode` / 読み取り: `html5-qrcode`                                                                           |
+| Lint/Format    | [oxlint](https://oxc.rs/docs/guide/usage/linter) + `bun fmt`                                                        |
 
 ## セットアップ
 
@@ -159,13 +159,13 @@ src/
 
 ## スクリプト
 
-| コマンド            | 内容                             |
-| ------------------- | -------------------------------- |
-| `bun run dev`       | 開発サーバー                     |
-| `bun run build`     | 本番ビルド                       |
-| `bun run start`     | ビルド済みサーバーを起動         |
-| `bun run check`     | 型チェック（svelte-check + TypeScript 7 / tsgo） |
-| `bun run lint`      | Biome チェック(lint + format)  |
-| `bun run format`    | Biome で整形・自動修正           |
-| `bun run test`      | 単体テスト(`bun test`)        |
-| `bun run db:seed`   | 初期データ投入                   |
+| コマンド          | 内容                                             |
+| ----------------- | ------------------------------------------------ |
+| `bun run dev`     | 開発サーバー                                     |
+| `bun run build`   | 本番ビルド                                       |
+| `bun run start`   | ビルド済みサーバーを起動                         |
+| `bun run check`   | 型チェック（svelte-check + TypeScript 7 / tsgo） |
+| `bun run lint`    | oxlint と書式の確認 (`bun fmt --check`)          |
+| `bun run format`  | oxlint の自動修正と整形 (`bun fmt`)              |
+| `bun run test`    | 単体テスト(`bun test`)                           |
+| `bun run db:seed` | 初期データ投入                                   |

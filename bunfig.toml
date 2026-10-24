@@ -2,3 +2,7 @@
 # `bun:sqlite` (used by the Drizzle SQLite driver) resolves correctly.
 [run]
 bun = true
+
+# 整形 (`bun fmt`。`package.json` の format・lint から呼ぶ)。書き方は既定のまま、外すものだけ
+[fmt]
+ignorePatterns = ["static/", "renovate.json"]

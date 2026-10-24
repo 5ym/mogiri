@@ -1,24 +1,33 @@
-import { Database } from 'bun:sqlite';
-import { describe, expect, test } from 'bun:test';
-import { ensureSchema } from './ddl';
+import { Database } from "bun:sqlite";
+import { describe, expect, test } from "bun:test";
+import { ensureSchema } from "./ddl";
 
 const columns = (db: Database, table: string) =>
-	(db.query(`PRAGMA table_info(${table})`).all() as { name: string }[]).map((c) => c.name);
+  (db.query(`PRAGMA table_info(${table})`).all() as { name: string }[]).map(
+    (c) => c.name,
+  );
 
-describe('ensureSchema', () => {
-	test('新しい DB に後から足した列ごと作る (何度流しても同じ)', () => {
-		const db = new Database(':memory:');
-		ensureSchema(db);
-		ensureSchema(db);
-		expect(columns(db, 'user_products')).toContain('variant_id');
-		expect(columns(db, 'pays')).toEqual(expect.arrayContaining(['method', 'paid']));
-		expect(columns(db, 'product_variants')).toEqual(['id', 'product_id', 'name', 'sort']);
-	});
+describe("ensureSchema", () => {
+  test("新しい DB に後から足した列ごと作る (何度流しても同じ)", () => {
+    const db = new Database(":memory:");
+    ensureSchema(db);
+    ensureSchema(db);
+    expect(columns(db, "user_products")).toContain("variant_id");
+    expect(columns(db, "pays")).toEqual(
+      expect.arrayContaining(["method", "paid"]),
+    );
+    expect(columns(db, "product_variants")).toEqual([
+      "id",
+      "product_id",
+      "name",
+      "sort",
+    ]);
+  });
 
-	test('列を足す前の DB に列を足し、当日購入の行を square に直す', () => {
-		const db = new Database(':memory:');
-		// 列を足す前のテーブル
-		db.exec(`
+  test("列を足す前の DB に列を足し、当日購入の行を square に直す", () => {
+    const db = new Database(":memory:");
+    // 列を足す前のテーブル
+    db.exec(`
 			CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL UNIQUE,
 				password_hash TEXT NOT NULL, is_active INTEGER NOT NULL DEFAULT 0,
 				is_staff INTEGER NOT NULL DEFAULT 0, is_superuser INTEGER NOT NULL DEFAULT 0,
@@ -42,15 +51,19 @@ describe('ensureSchema', () => {
 				(3, 'CCCCCCCCCCCCCCCC', 'CCCCCCCCCCCCCCCC', 0);
 		`);
 
-		ensureSchema(db);
-		ensureSchema(db);
+    ensureSchema(db);
+    ensureSchema(db);
 
-		expect(columns(db, 'user_products')).toContain('variant_id');
-		expect(db.query('SELECT variant_id AS v FROM user_products').get()).toEqual({ v: null });
-		expect(db.query('SELECT user_id, method, paid FROM pays ORDER BY user_id').all()).toEqual([
-			{ user_id: 1, method: 'stripe', paid: 1 },
-			{ user_id: 2, method: 'square', paid: 1 },
-			{ user_id: 3, method: 'square', paid: 0 },
-		]);
-	});
+    expect(columns(db, "user_products")).toContain("variant_id");
+    expect(db.query("SELECT variant_id AS v FROM user_products").get()).toEqual(
+      { v: null },
+    );
+    expect(
+      db.query("SELECT user_id, method, paid FROM pays ORDER BY user_id").all(),
+    ).toEqual([
+      { user_id: 1, method: "stripe", paid: 1 },
+      { user_id: 2, method: "square", paid: 1 },
+      { user_id: 3, method: "square", paid: 0 },
+    ]);
+  });
 });

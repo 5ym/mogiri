@@ -46,18 +46,19 @@
 @import "@anyblades/blades/layered/utilities";
 
 :root {
-	/* Web フォントは束ねない(OS のフォントに任せる) */
-	--pico-font-family-sans-serif:
-		"BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", system-ui, sans-serif;
+  /* Web フォントは束ねない(OS のフォントに任せる) */
+  --pico-font-family-sans-serif:
+    "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", system-ui,
+    sans-serif;
 }
 
 body {
-	/* 日本語を文節で折り返す */
-	word-break: auto-phrase;
-	line-break: strict;
+  /* 日本語を文節で折り返す */
+  word-break: auto-phrase;
+  line-break: strict;
 }
 
 /* 横に流す表は列を潰させない(狭い画面で1文字ずつ折り返すのを防ぐ) */
 .overflow-auto > table {
-	white-space: nowrap;
+  white-space: nowrap;
 }
