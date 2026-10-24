@@ -7,4 +7,4 @@ bun = true
 [fmt]
 # import を並べ替える (組の分け方は既定のまま。副作用だけの import は動かさない)
 sortImports = true
-ignorePatterns = ["static/", "renovate.json"]
+ignorePatterns = ["renovate.json"]
