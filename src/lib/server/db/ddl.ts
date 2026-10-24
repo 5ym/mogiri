@@ -1,4 +1,4 @@
-import type { Database } from 'bun:sqlite';
+import type { Database } from "bun:sqlite";
 
 /**
  * Idempotent schema bootstrap — the single source of truth for the table
@@ -90,33 +90,41 @@ CREATE TABLE IF NOT EXISTS entries (
  * 定義は上の `CREATE TABLE` と揃えること。
  */
 const ADDED_COLUMNS: { table: string; column: string; definition: string }[] = [
-	{
-		table: 'user_products',
-		column: 'variant_id',
-		definition: 'INTEGER REFERENCES product_variants(id)',
-	},
-	{ table: 'pays', column: 'method', definition: "TEXT NOT NULL DEFAULT 'stripe'" },
-	{ table: 'pays', column: 'paid', definition: 'INTEGER NOT NULL DEFAULT 1' },
+  {
+    table: "user_products",
+    column: "variant_id",
+    definition: "INTEGER REFERENCES product_variants(id)",
+  },
+  {
+    table: "pays",
+    column: "method",
+    definition: "TEXT NOT NULL DEFAULT 'stripe'",
+  },
+  { table: "pays", column: "paid", definition: "INTEGER NOT NULL DEFAULT 1" },
 ];
 
 function hasColumn(sqlite: Database, table: string, column: string): boolean {
-	const columns = sqlite.query(`PRAGMA table_info(${table})`).all() as { name: string }[];
-	return columns.some((c) => c.name === column);
+  const columns = sqlite.query(`PRAGMA table_info(${table})`).all() as {
+    name: string;
+  }[];
+  return columns.some((c) => c.name === column);
 }
 
 export function ensureSchema(sqlite: Database): void {
-	sqlite.transaction(() => {
-		sqlite.exec(DDL);
-		const added = new Set<string>();
-		for (const { table, column, definition } of ADDED_COLUMNS) {
-			if (hasColumn(sqlite, table, column)) continue;
-			sqlite.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
-			added.add(`${table}.${column}`);
-		}
-		// 列を足す前の当日購入 (/api/buy) は token に code を入れていた。既定の stripe・支払い済み
-		// のままだと誤るので、Square から戻って受け取り済みになったものだけを支払い済みにする
-		if (added.has('pays.method')) {
-			sqlite.exec("UPDATE pays SET method = 'square', paid = receive WHERE token = code");
-		}
-	})();
+  sqlite.transaction(() => {
+    sqlite.exec(DDL);
+    const added = new Set<string>();
+    for (const { table, column, definition } of ADDED_COLUMNS) {
+      if (hasColumn(sqlite, table, column)) continue;
+      sqlite.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+      added.add(`${table}.${column}`);
+    }
+    // 列を足す前の当日購入 (/api/buy) は token に code を入れていた。既定の stripe・支払い済み
+    // のままだと誤るので、Square から戻って受け取り済みになったものだけを支払い済みにする
+    if (added.has("pays.method")) {
+      sqlite.exec(
+        "UPDATE pays SET method = 'square', paid = receive WHERE token = code",
+      );
+    }
+  })();
 }

@@ -1,40 +1,40 @@
 {
-	"name": "mogiri",
-	"version": "2.0.0",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"start": "bun ./build",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --tsgo",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --tsgo --watch",
-		"lint": "biome check .",
-		"format": "biome check --write .",
-		"test": "bun test src",
-		"db:seed": "bun run src/lib/server/db/seed.ts"
-	},
-	"devDependencies": {
-		"@anyblades/blades": "3.1.0-beta.5",
-		"@biomejs/biome": "^2.6.2",
-		"@stripe/stripe-js": "^10.1.0",
-		"@sveltejs/adapter-bun": "^1.0.0",
-		"@sveltejs/kit": "^3.1.0",
-		"@sveltejs/vite-plugin-svelte": "^7.3.1",
-		"@types/bun": "^1.4.4",
-		"@types/qrcode": "^1.5.6",
-		"@typescript/native": "npm:typescript@7",
-		"html5-qrcode": "^2.3.8",
-		"qrcode": "^1.5.4",
-		"stripe": "^23.0.1",
-		"svelte": "^5.57.2",
-		"svelte-check": "^4.7.7",
-		"typescript": "~6.0.3",
-		"vite": "^8.3.5"
-	},
-	"imports": {
-		"#lib": "./src/lib/index.js",
-		"#lib/*": "./src/lib/*"
-	}
+  "name": "mogiri",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "bun ./build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --tsgo",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --tsgo --watch",
+    "lint": "oxlint && bun fmt --check",
+    "format": "oxlint --fix && bun fmt",
+    "test": "bun test src",
+    "db:seed": "bun run src/lib/server/db/seed.ts"
+  },
+  "devDependencies": {
+    "@anyblades/blades": "3.1.0-beta.5",
+    "@stripe/stripe-js": "^10.1.0",
+    "@sveltejs/adapter-bun": "^1.0.0",
+    "@sveltejs/kit": "^3.1.0",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@types/bun": "^1.4.4",
+    "@types/qrcode": "^1.5.6",
+    "@typescript/native": "npm:typescript@7",
+    "html5-qrcode": "^2.3.8",
+    "oxlint": "^1.89.0",
+    "qrcode": "^1.5.4",
+    "stripe": "^23.0.1",
+    "svelte": "^5.57.2",
+    "svelte-check": "^4.7.7",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.5"
+  },
+  "imports": {
+    "#lib": "./src/lib/index.js",
+    "#lib/*": "./src/lib/*"
+  }
 }

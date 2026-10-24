@@ -1,13 +1,13 @@
-import type { SessionUser } from '#lib/server/auth.js';
+import type { SessionUser } from "#lib/server/auth.js";
 
 declare global {
-	namespace App {
-		// interface Error {}
-		interface Locals {
-			user: SessionUser | null;
-		}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
-	}
+  namespace App {
+    // interface Error {}
+    interface Locals {
+      user: SessionUser | null;
+    }
+    // interface PageData {}
+    // interface PageState {}
+    // interface Platform {}
+  }
 }
