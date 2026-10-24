@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import type { Html5Qrcode } from "html5-qrcode";
   import { onDestroy, onMount } from "svelte";
+
   import { entryStatusPath, isValidCode } from "#lib/validation.js";
-  import { goto } from "$app/navigation";
 
   let scanner: Html5Qrcode | null = null;
   let error = $state("");

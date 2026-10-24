@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { entryStatusPath, isValidCode } from "./validation";
 
 describe("entryStatusPath", () => {

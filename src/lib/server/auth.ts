@@ -1,4 +1,5 @@
 import type { RequestEvent } from "@sveltejs/kit";
+
 import { db } from "./db";
 
 export const SESSION_COOKIE = "session";

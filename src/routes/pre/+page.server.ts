@@ -1,4 +1,5 @@
 import { fail } from "@sveltejs/kit";
+
 import { parseSelections, priceSelections } from "#lib/order.js";
 import { hashPassword } from "#lib/server/auth.js";
 import {
@@ -12,6 +13,7 @@ import {
 } from "#lib/server/db/repo.js";
 import { sendVerificationEmail } from "#lib/server/email.js";
 import { randomCode } from "#lib/server/util.js";
+
 import type { Actions, PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async () => {

@@ -1,7 +1,9 @@
 import { Database } from "bun:sqlite";
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
+
 import { DATABASE_URL } from "$app/env/private";
+
 import { ensureSchema } from "./ddl";
 
 const url = DATABASE_URL;

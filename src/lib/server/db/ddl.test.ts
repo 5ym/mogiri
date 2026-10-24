@@ -1,5 +1,6 @@
 import { Database } from "bun:sqlite";
 import { describe, expect, test } from "bun:test";
+
 import { ensureSchema } from "./ddl";
 
 const columns = (db: Database, table: string) =>

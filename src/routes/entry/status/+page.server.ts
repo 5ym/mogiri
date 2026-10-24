@@ -1,10 +1,12 @@
 import { error, fail } from "@sveltejs/kit";
+
 import {
   getEntryBySecret,
   statusLabel,
   updateEntryStatus,
 } from "#lib/server/db/repo.js";
 import { requireStaff } from "#lib/server/guards.js";
+
 import type { Actions, PageServerLoad } from "./$types";
 
 /**

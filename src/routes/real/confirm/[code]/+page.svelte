@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
+  import { goto } from "$app/navigation";
   import { onMount } from "svelte";
+
   import OrderTable from "#lib/components/OrderTable.svelte";
   import PayStatus from "#lib/components/PayStatus.svelte";
   import { toasts } from "#lib/stores/toast.svelte.js";
-  import { enhance } from "$app/forms";
-  import { goto } from "$app/navigation";
+
   import type { ActionData, PageData } from "./$types";
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
