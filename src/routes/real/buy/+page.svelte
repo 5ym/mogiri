@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+
   import ProductPicker from "#lib/components/ProductPicker.svelte";
   import { countsToSelections, countsTotal } from "#lib/order.js";
   import { toasts } from "#lib/stores/toast.svelte.js";
-  import { goto } from "$app/navigation";
+
   import type { PageData } from "./$types";
 
   let { data }: { data: PageData } = $props();

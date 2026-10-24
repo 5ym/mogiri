@@ -1,8 +1,10 @@
 <script lang="ts">
   import "@anyblades/blades/layered/content/table";
   import "@anyblades/blades/layered/content/code";
-  import EntryLabel from "#lib/components/EntryLabel.svelte";
   import { enhance, type SubmitFunction } from "$app/forms";
+
+  import EntryLabel from "#lib/components/EntryLabel.svelte";
+
   import type { ActionData, PageData } from "./$types";
 
   let { data, form }: { data: PageData; form: ActionData } = $props();

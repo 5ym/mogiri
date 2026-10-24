@@ -1,4 +1,5 @@
 import { error, fail } from "@sveltejs/kit";
+
 import {
   getPayByCode,
   getUserById,
@@ -7,6 +8,7 @@ import {
 import { requireStaff } from "#lib/server/guards.js";
 import { getOrderLines } from "#lib/server/orders.js";
 import { isValidCode } from "#lib/validation.js";
+
 import type { Actions, PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ locals, params }) => {

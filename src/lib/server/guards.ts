@@ -1,4 +1,5 @@
 import { error, redirect } from "@sveltejs/kit";
+
 import type { SessionUser } from "./auth";
 
 /** Require an authenticated user, redirecting to login otherwise. */

@@ -1,10 +1,12 @@
 import { fail, redirect } from "@sveltejs/kit";
+
 import {
   createSession,
   setSessionCookie,
   verifyPassword,
 } from "#lib/server/auth.js";
 import { getUserByEmail } from "#lib/server/db/repo.js";
+
 import type { Actions, PageServerLoad } from "./$types";
 
 /**

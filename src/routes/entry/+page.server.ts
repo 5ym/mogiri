@@ -1,5 +1,7 @@
 import { fail } from "@sveltejs/kit";
+
 import { createEntry, getEntryBySecret } from "#lib/server/db/repo.js";
+
 import type { Actions } from "./$types";
 
 /** 入場受付 (来場者向け)。アカウントは作らず、名前・連絡先・住所からシークレットを発行する。 */

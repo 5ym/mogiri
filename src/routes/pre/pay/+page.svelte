@@ -1,12 +1,14 @@
 <script lang="ts">
   import "@anyblades/blades/layered/components/modal";
+  import { enhance } from "$app/forms";
+  import { goto } from "$app/navigation";
   import type { Stripe, StripeCardElement } from "@stripe/stripe-js";
   import { onMount } from "svelte";
+
   import OrderTable from "#lib/components/OrderTable.svelte";
   import { PAY_METHOD_LABELS } from "#lib/order.js";
   import { toasts } from "#lib/stores/toast.svelte.js";
-  import { enhance } from "$app/forms";
-  import { goto } from "$app/navigation";
+
   import type { ActionData, PageData } from "./$types";
 
   let { data, form }: { data: PageData; form: ActionData } = $props();

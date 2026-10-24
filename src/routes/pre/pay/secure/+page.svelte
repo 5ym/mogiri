@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { page } from "$app/state";
+  import { onMount } from "svelte";
 
   // This page is loaded inside the 3DS iframe. It finalises the payment and
   // notifies the parent window that authentication completed.

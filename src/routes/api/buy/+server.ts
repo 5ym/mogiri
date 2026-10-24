@@ -1,4 +1,5 @@
 import { error, json } from "@sveltejs/kit";
+
 import { parseSelections, priceSelections } from "#lib/order.js";
 import { hashPassword } from "#lib/server/auth.js";
 import {
@@ -10,6 +11,7 @@ import {
 } from "#lib/server/db/repo.js";
 import { requireStaff } from "#lib/server/guards.js";
 import { randomCode } from "#lib/server/util.js";
+
 import type { RequestHandler } from "./$types";
 
 /**

@@ -1,5 +1,5 @@
-import Stripe from "stripe";
 import { STRIPE_SECRET_KEY } from "$app/env/private";
+import Stripe from "stripe";
 
 let client: Stripe | null = null;
 

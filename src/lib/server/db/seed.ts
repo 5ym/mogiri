@@ -7,6 +7,7 @@
 import { Database } from "bun:sqlite";
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
+
 import { ensureSchema } from "./ddl";
 
 const url = process.env.DATABASE_URL ?? "./data/mogiri.db";
